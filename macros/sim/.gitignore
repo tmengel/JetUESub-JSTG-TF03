@@ -1,0 +1,31 @@
+# for dstlists
+*.list
+HIJetReco.C
+
+# for root files
+*.root
+
+# for plots
+*.png
+*.pdf
+*.jpg 
+
+# condor logs
+*.err
+*.out
+log/
+condor/
+
+
+# ignore RVM configuration
+.rvmrc
+
+# For TextMate
+*.tmproj
+tmtags
+
+# For emacs:
+*~
+\#*
+.\#*
+
