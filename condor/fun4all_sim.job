@@ -1,0 +1,14 @@
+initialDir          = /sphenix/user/tmengel/PPG14/macros/truthjet/fun4all_sim
+Universe            = vanilla
+Executable          = $(initialDir)/f4a_all.sh
+PeriodicHold        = (NumJobStarts>=1 && JobStatus == 1)
+request_memory      = 3GB
+Priority            = 20
+pthat               = 10
+batch_name          = jet$(pthat)
+condorDir           = $(initialDir)/logs/
+Output              = $(condorDir)/$(PROCESS).out
+Error               = $(condorDir)/$(PROCESS).err
+Log                 = /tmp/condorjob-tmengel.log
+Arguments           = "$(PROCESS) $(pthat)"
+Queue 15000

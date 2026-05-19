@@ -1,0 +1,17 @@
+
+# for dstlists
+*.list
+
+# for root files
+*.root
+
+# for plots
+*.png
+*.pdf
+*.jpg 
+
+# condor logs
+*.err
+*.out
+logs/
+

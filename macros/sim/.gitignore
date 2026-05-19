@@ -14,7 +14,6 @@
 *.err
 *.out
 log/
-condor/
 
 
 # ignore RVM configuration

@@ -21,7 +21,6 @@ install/
 *.err
 *.out
 log/
-condor/
 
 # http://www.gnu.org/software/automake
 
