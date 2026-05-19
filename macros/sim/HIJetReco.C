@@ -92,6 +92,7 @@ namespace HIJETS
   // phi reweight .. should just be true without option to change
   bool do_reweight = true; // if true, use reweighting to account for flow modulation in background estimation, if false, just exclude all towers in eta strips with seeds and/or bad towers
 
+  std::string EPD_tower_node = "TOWERINFO_CALIB_SEPD";
 
   ///! sets algo of seed jets
   Jet::ALGO seed_algo  = Jet::ANTIKT;
@@ -233,6 +234,7 @@ void MakeHITowerJets()
   if ( HIJETS::do_flow == 3 )
   {
     auto * epreco = new EventPlaneReco();
+    epreco -> set_inputNode( HIJETS::EPD_tower_node );
     se -> registerSubsystem( epreco );
   }
 
@@ -247,7 +249,7 @@ void MakeHITowerJets()
   // seed settings
   FastJetOptions seed_fj_opts( { Jet::ANTIKT, 0.2, 0 } );
   std::string seed_node_name = HIJETS::algo_prefix + "_TowerInfo_HIRecoSeedsRaw_r02";
-  std::string seed_node_subname = HIJETS::algo_prefix + "_TowerInfo_HIRecoSeedsSub1_r02";
+  std::string seed_node_subname = HIJETS::algo_prefix + "_TowerInfo_HIRecoSeedsSub_r02";
   
   // input to subtraction and background estimation modules
   // defaults are retowered emcal, ihcal, emcal
@@ -344,6 +346,7 @@ void MakeHITowerJetsv2()
   if ( HIJETS::do_flow == 3 )
   {
     auto * epreco = new EventPlaneReco();
+    epreco -> set_inputNode( HIJETS::EPD_tower_node );
     se -> registerSubsystem( epreco );
   }
 
@@ -358,11 +361,11 @@ void MakeHITowerJetsv2()
   // seed settings
   FastJetOptions seed_fj_opts( { HIJETS::seed_algo, HIJETS::seed_R, 0 } );
   std::string seed_node_name = HIJETS::algo_prefix + "_TowerInfo_HIRecoSeedsRaw_r0" + std::to_string( static_cast<int>(HIJETS::seed_R * 10) );
-  std::string seed_node_subname = HIJETS::algo_prefix + "_TowerInfo_HIRecoSeedsSub1_r0" + std::to_string( static_cast<int>(HIJETS::seed_R * 10) );
+  std::string seed_node_subname = HIJETS::algo_prefix + "_TowerInfo_HIRecoSeedsSub_r0" + std::to_string( static_cast<int>(HIJETS::seed_R * 10) );
   if ( HIJETS::seed_algo == Jet::KT )
   {
     seed_node_name = "kT_TowerInfo_HIRecoSeedsRaw_r0" + std::to_string( static_cast<int>(HIJETS::seed_R * 10) );
-    seed_node_subname = "kT_TowerInfo_HIRecoSeedsSub1_r0" + std::to_string( static_cast<int>(HIJETS::seed_R * 10) );
+    seed_node_subname = "kT_TowerInfo_HIRecoSeedsSub_r0" + std::to_string( static_cast<int>(HIJETS::seed_R * 10) );
   }
 
   // input to subtraction and background estimation modules
@@ -594,7 +597,7 @@ void HIJetReco()
 
   // run approriate jet reconstruction routines
   if (Enable::HIJETS_TOWER && !Enable::HIJETS_ENABLE_TEST ) MakeHITowerJets();
-  // if (Enable::HIJETS_TOWER && Enable::HIJETS_ENABLE_TEST ) MakeHITowerJetsv2();
+  if (Enable::HIJETS_TOWER && Enable::HIJETS_ENABLE_TEST ) MakeHITowerJetsv2();
   if (Enable::HIJETS_TRACK) MakeHITrackJets();
   if (Enable::HIJETS_PFLOW) MakeHIPFlowJets();
 }

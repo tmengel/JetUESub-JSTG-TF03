@@ -36,20 +36,21 @@ R__LOAD_LIBRARY( libjetbase.so )
 
 
 void Fun4All_Sim ( 
-    const int nEvents = 10,
-    const int run_number = 31,
-    const int segment = 0,
+    const int nEvents        = 10,
+    const int run_number     = 31,
+    const int segment        = 0,
+    const int jet_flag       = 10,
+    const int flow_flag      = 3,
+    const int test_flag      = 0,
     const std::string & outfile = "testout.root"
 )
 {
-
-    const std::string cdbtag = "MDC2";
-    const int jet_flag       = 10;
-
     std::cout << "Fun4All" << std::endl;
 
     Enable::VERBOSITY = 0;
-   
+    Enable::HIJETS_VERBOSITY = 0;
+
+    const std::string cdbtag = "MDC2";
     
     // Fun4All
     auto se = Fun4AllServer::instance();
@@ -114,23 +115,20 @@ void Fun4All_Sim (
 
     // this flag alone will allow the configuration of DTB
     // changing anything else if this is false will do nothing!
-    // Enable::HIJETS_ENABLE_TEST = true; 
+    Enable::HIJETS_ENABLE_TEST = true; 
 
     // 0 - default
-    
     // 1 - disable exclude full eta strip in flow calc,  renormalize eta strip in flow calc
     // 2 - R = 0.4, kT seeds
     // 3 - limit to 2 seeds     
     // 4 - positive E tower cut, require positive UE
-
     // 5 - dab on them 
-    int HIJET_TEST_NUMBER = 0;
+    const int HIJET_TEST_NUMBER = test_flag;
+    std::cout << "HIJET_TEST_NUMBER: " << HIJET_TEST_NUMBER << std::endl;
+    HIJETS::do_flow = flow_flag;
+    std::cout << "HIJETS::do_flow: " << HIJETS::do_flow << std::endl;
 
-    // default settings 
-    Enable::HIJETS_VERBOSITY = 0;
-   
-    HIJETS::do_flow = 3; // event by event
-
+    HIJETS::EPD_tower_node = "TOWERINFO_CALIB_EPD"; //sim
     HIJETS::seed_algo = Jet::ANTIKT; 
     HIJETS::seed_R = 0.2;
     HIJETS::n_omit_seeds = -1;
@@ -177,8 +175,6 @@ void Fun4All_Sim (
         HIJETS::min_tower_energy = 0.0;
         HIJETS::do_double_check_on_UE = true;
     }
-
-   
 
     HIJetReco();
 
