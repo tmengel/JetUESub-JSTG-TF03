@@ -419,15 +419,14 @@ void MakeHITowerJetsv2()
   dtb -> SetDoDoubleCheckOnUE( HIJETS::do_double_check_on_UE );
   dtb -> SetMinTowerEnergy( HIJETS::min_tower_energy );  
   dtb -> SetNOmitSeeds( HIJETS::n_omit_seeds );
-
   dtb -> SetVertexType( HIJETS::vertex_type );
   dtb -> SetSeedType( 0 );
   dtb -> SetSeedJetD( 3.0 );
   dtb -> SetSeedMaxConst( 3.0 );
   dtb -> SetSeedJetPt( 5.0 );
-  dtb -> SetIHCAL_TowerInfoNode( HIJETS::tower_prefix + "_HCALIN_TOWERINFO" );
-  dtb -> SetOHCAL_TowerInfoNode( HIJETS::tower_prefix + "_HCALOUT_TOWERINFO" );
-  dtb -> SetCEMC_RetowerInfoNode( HIJETS::tower_prefix + "_CEMC_TOWERINFO_RETOWER" );
+  dtb -> SetIHCAL_TowerInfoNode( HIJETS::tower_prefix + "_HCALIN" );
+  dtb -> SetOHCAL_TowerInfoNode( HIJETS::tower_prefix + "_HCALOUT" );
+  dtb -> SetCEMC_RetowerInfoNode( HIJETS::tower_prefix + "_CEMC_RETOWER" );
   dtb -> SetSeedJetName( seed_node_name );
   dtb -> Verbosity( verbosity );
   se -> registerSubsystem( dtb );
@@ -481,9 +480,9 @@ void MakeHITowerJetsv2()
   dtb2 -> SetVertexType( HIJETS::vertex_type );
   dtb2 -> SetSeedType( 1 );
   dtb2 -> SetSeedJetPt( 7.0 );
-  dtb2 -> SetIHCAL_TowerInfoNode( HIJETS::tower_prefix + "_HCALIN_TOWERINFO" );
-  dtb2 -> SetOHCAL_TowerInfoNode( HIJETS::tower_prefix + "_HCALOUT_TOWERINFO" );
-  dtb2 -> SetCEMC_RetowerInfoNode( HIJETS::tower_prefix + "_CEMC_TOWERINFO_RETOWER" );
+  dtb2 -> SetIHCAL_TowerInfoNode( HIJETS::tower_prefix + "_HCALIN" );
+  dtb2 -> SetOHCAL_TowerInfoNode( HIJETS::tower_prefix + "_HCALOUT" );
+  dtb2 -> SetCEMC_RetowerInfoNode( HIJETS::tower_prefix + "_CEMC_RETOWER" );
   dtb2 -> SetSeedJetName( seed_node_name );
   dtb2 -> Verbosity( verbosity );
   se -> registerSubsystem( dtb2 );
@@ -515,7 +514,6 @@ void MakeHITowerJetsv2()
   return;
 
 }
-
 
 // ----------------------------------------------------------------------------
 //! Make jets out of tracks with background subtraction

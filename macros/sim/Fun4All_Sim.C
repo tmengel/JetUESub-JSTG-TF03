@@ -93,11 +93,6 @@ void Fun4All_Sim (
     // calibrate
     Process_Calo_Calib(); 
 
-    auto ep = new EventPlaneReco( );
-    ep -> set_inputNode( "TOWERINFO_CALIB_EPD" );
-    ep -> Verbosity( Enable::VERBOSITY );
-    se -> registerSubsystem( ep );    
-
     auto mb = new MinimumBiasClassifier( );
     mb -> setIsSim( true );
     mb -> setOverwriteScale( "/sphenix/user/dlis/Projects/centrality/cdb/calibrations/scales/cdb_centrality_scale_1.root" );
