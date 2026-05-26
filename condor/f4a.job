@@ -1,6 +1,6 @@
 initialDir          = /sphenix/user/tmengel/PPG14/macros/truthjet/fun4all_sim
 Universe            = vanilla
-Executable          = $(initialDir)/f4a_all.sh
+Executable          = $(initialDir)/fun4all.sh
 PeriodicHold        = (NumJobStarts>=1 && JobStatus == 1)
 request_memory      = 3GB
 Priority            = 20
